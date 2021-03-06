@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  # Just to delay if needed
+#  minReadySeconds: 20
+  selector:
+    matchLabels:
+      app: webapp
+      release: 0-0
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: webapp
+        release: 0-0
+    spec:
+      containers:
+        - name: webapp
+#          image: richardchesterwood/k8s-fleetman-webapp-angular:release0
+          image: richardchesterwood/k8s-fleetman-webapp-angular:release0-5

@@ -1,0 +1,23 @@
+# No need to define explicit pods, template does pod definition
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: queue
+spec:
+  selector:
+    # Need this matchLabels field else things wont work as expected
+    # match labels matches on all the labels supplied in the template
+    matchLabels:
+      app: queue
+  replicas: 3
+  template:
+    # In this field, supply pod definition
+    # refer to pods/fleetman-queue.yaml
+    # pod is named by replicaSet
+    metadata:
+      labels:
+        app: queue
+    spec:
+      containers:
+        - name: queue
+          image: richardchesterwood/k8s-fleetman-queue:release1
